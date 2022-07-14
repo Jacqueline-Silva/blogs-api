@@ -55,6 +55,20 @@ const UserService = {
 
     return users;
   },
+
+  findByUser: async (id) => {
+    const userId = await User.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    if (!userId) {
+      const error = new Error('User does not exist');
+      error.name = 'NotFoundError';
+      throw error;
+    }
+
+    return userId;
+  },
 };
 
 module.exports = UserService;

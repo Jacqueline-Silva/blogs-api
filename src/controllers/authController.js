@@ -16,7 +16,7 @@ const authController = {
 
     if (!token) {
       const error = new Error('Token not found');
-      error.name = 'NotFoundError';
+      error.name = 'UnauthorizedError';
       throw error;
     }
 
