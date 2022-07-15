@@ -37,6 +37,11 @@ const categoryService = {
     return newCategory;
   },
 
+  getAllCategories: async () => {
+    const categories = await Category.findAll();
+
+    return categories;
+  },
 };
 
 module.exports = categoryService;

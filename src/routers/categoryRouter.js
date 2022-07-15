@@ -8,4 +8,6 @@ router.use(authController.verifyToken);
 
 router.post('/', categoryController.addCategory);
 
+router.get('/', categoryController.getAllCategories);
+
 module.exports = router;
