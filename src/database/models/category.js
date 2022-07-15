@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Category.associate = (models) => {
-  //   Category.hasMany(models.BlogPosts,
-  //     { foreignKey: 'categoryId', as: '' });
+  //   Category.hasMany(models.PostCategory,
+  //     { foreignKey: 'categoryId', as: 'PostCategory' });
   // };
   
   return Category;
