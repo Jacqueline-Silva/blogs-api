@@ -20,17 +20,17 @@ const authService = {
     return value;
   },
 
-  login: async (email, password) => {
+  login: async (email, pass) => {
     // findOne, procura um
     const user = await User.findOne({ where: { email } });
 
-    if (user === null || user.password !== password) {
+    if (user === null || user.password !== pass) {
       const e = new Error('Invalid fields');
       e.name = 'ValidationError';
       throw e;
     }
 
-    const { passwordHash, ...userWithoutPassword } = user.dataValues;
+    const { password, ...userWithoutPassword } = user.dataValues;
 
     const token = jwtService.createToken(userWithoutPassword);
 

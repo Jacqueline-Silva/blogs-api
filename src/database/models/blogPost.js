@@ -1,6 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const BlogPost = sequelize.define('BlogPost', {
     id: { 
+      allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
@@ -10,8 +12,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       foreignKey: true
     },
-    published: DataTypes.DATE,
-    updated: DataTypes.DATE,
+    published: {
+      type: DataTypes.DATE,
+      defaultValue: new Date(),
+    },
+    updated: {
+      type: DataTypes.DATE,
+      defaultValue: new Date(),
+    },
   }, 
   {
     tableName: 'BlogPosts',

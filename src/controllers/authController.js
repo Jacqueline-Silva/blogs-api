@@ -20,7 +20,8 @@ const authController = {
       throw error;
     }
 
-    jwtService.verifyToken(token);
+    const id = jwtService.verifyToken(token);
+    req.userId = id;
 
     next();
   },

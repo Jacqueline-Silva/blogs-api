@@ -29,6 +29,18 @@ const categoryService = {
     }
   },
 
+  checkIfExistsById: async (id) => {
+    const category = await Category.findOne({ 
+      where: { id }, 
+    });
+
+    if (!category) {
+      const e = new Error('"categoryIds" not found');
+      e.name = 'ValidationError';
+      throw e;
+    }
+  },
+
   addCategory: async (name) => {
     const newCategory = await Category.create({
       name,
