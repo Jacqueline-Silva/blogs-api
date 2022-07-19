@@ -41,7 +41,7 @@ const UserService = {
       image,
     });
 
-    const { passwordHash, ...userWithoutPassword } = newUser.dataValues;
+    const { password: p, ...userWithoutPassword } = newUser.dataValues;
 
     const token = jwtService.createToken(userWithoutPassword);
 
