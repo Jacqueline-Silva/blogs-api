@@ -20,6 +20,18 @@ const PostService = {
     return value;
   },
 
+  checkIfExistsById: async (id) => {
+    const postId = await BlogPost.findOne({ 
+      where: { id }, 
+    });
+
+    if (!postId) {
+      const e = new Error('Post does not exist');
+      e.name = 'NotFoundError';
+      throw e;
+    }
+  },
+
   addBlogPost: async (data) => {
     const { categoryIds, userId, title, content } = data;
 
@@ -52,8 +64,20 @@ const PostService = {
         },
       ],
     });
-    console.log('all', all.dataValues);
+
     return all;
+  },
+
+  getById: async (id) => {
+    const blogById = await BlogPost.findOne({
+      where: { id },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+
+    return blogById;
   },
 };
 

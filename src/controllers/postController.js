@@ -22,6 +22,16 @@ const PostController = {
 
     res.status(200).json(all);
   },
+
+  getById: async (req, res) => {
+    const { id } = req.params;
+
+    await PostService.checkIfExistsById(id);
+    
+    const blogById = await PostService.getById(+id);
+
+    res.status(200).json(blogById);
+  },
 };
 
 module.exports = PostController;
