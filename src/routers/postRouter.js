@@ -6,6 +6,8 @@ const router = Router();
 
 router.use(authController.verifyToken);
 
+router.get('/', postController.getAll);
+
 router.post('/', postController.addBlogPost);
 
 module.exports = router;

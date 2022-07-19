@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { BlogPost, sequelize, PostCategory } = require('../database/models');
+const { BlogPost, User, Category, sequelize, PostCategory } = require('../database/models');
 
 const PostService = {
   validateBody: async (data) => {
@@ -40,6 +40,20 @@ const PostService = {
     });
 
     return result;
+  },
+
+   getAll: async () => {
+    const all = await BlogPost.findAll({
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, 
+          as: 'categories', 
+          through: { attributes: [] },
+        },
+      ],
+    });
+    console.log('all', all.dataValues);
+    return all;
   },
 };
 
